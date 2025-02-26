@@ -29,6 +29,14 @@
 				"${workspaceFolder}/dist/**/*.js"
 			],
 			"preLaunchTask": "${defaultBuildTask}"
-		}
+		},
+		{
+            "name": "Test with debug",
+            "type": "extensionHost",
+            "request": "launch",
+            "testConfiguration": "${workspaceFolder}/.vscode-test.mjs",
+            "args": ["--extensionDevelopmentPath=${workspaceFolder}"],
+            "preLaunchTask": "tasks: pre-debug-test"
+        }
 	]
 }

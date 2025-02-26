@@ -35,6 +35,36 @@
 				"npm: watch-tests"
 			],
 			"problemMatcher": []
-		}
+		},
+		 {
+            "type": "npm",
+            "script": "compile-tests",
+            "label": "tasks: compile-tests",
+            "isBackground": true,
+            "problemMatcher": []
+        },
+        {
+            "type": "npm",
+            "script": "compile",
+            "label": "tasks: compile-source",
+            "isBackground": true,
+            "problemMatcher": []
+        },
+        {
+            "type": "npm",
+            "script": "lint",
+            "label": "tasks: lint",
+            "isBackground": true,
+            "problemMatcher": []
+        },
+        {
+            "label": "tasks: pre-debug-test",
+            "dependsOn": [
+                "tasks: compile-tests",
+                "tasks: compile-source",
+                "tasks: lint",
+            ],
+            "problemMatcher": []
+        }
 	]
 }
