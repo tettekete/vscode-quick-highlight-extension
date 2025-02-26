@@ -1,0 +1,5 @@
+{
+	"quick-highlight.borderOnly": "Highlight only the borderline, not the background color of the text.",
+	"quick-highlight.caseInsensitive": "Highlight matched words ignoring case sensitivity.",
+	"quick-highlight.automaticWordBoundaryHandling": "When unchecked, text is highlighted simply based on matches, just like a standard search.\n\nThe default setting is **ON**. For example, if you select and highlight the word `moon`, which is surrounded by spaces or other word boundaries, it is automatically treated as an independent word. This means that `moon` inside `moonlight` will **not** be highlighted.\n\nConversely, if you select and highlight `moon` within `moonlight`, both `moon` and the `moon` inside `moonlight` will be highlighted."
+}

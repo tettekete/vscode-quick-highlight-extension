@@ -12,6 +12,27 @@
   "activationEvents": [],
   "main": "./dist/extension.js",
   "contributes": {
+    "configuration": {
+      "type": "object",
+      "title": "Quick Highlight", 
+      "properties": {
+        "quick-highlight.borderOnly": {
+          "type": "boolean",
+          "description": "%quick-highlight.borderOnly%",
+          "default": false
+        },
+        "quick-highlight.caseInsensitive": {
+          "type": "boolean",
+          "description": "%quick-highlight.caseInsensitive%",
+          "default": false
+        },
+        "quick-highlight.automaticWordBoundaryHandling": {
+          "type": "boolean",
+          "markdownDescription": "%quick-highlight.automaticWordBoundaryHandling%",
+          "default": true
+        }
+      }
+    },
     "commands": [
       {
         "command": "quick-hilight.helloWorld",

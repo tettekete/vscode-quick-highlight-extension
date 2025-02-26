@@ -1,0 +1,5 @@
+{
+	"quick-highlight.borderOnly": "テキストの背景色は変更せず、ボーダーラインだけでハイライトする。",
+	"quick-highlight.caseInsensitive": "大文字小文字を無視してマッチしたワードをハイライトする。",
+	"quick-highlight.automaticWordBoundaryHandling": "チェックを外すと通常の検索を行った場合と同じように単純にマッチするテキストをハイライト対象とします。\n\nデフォルトは ON です。この場合、例えばスペース等の単語境界に囲まれた `moon` をハイライト対象とした場合、自動的に独立したワードとしての `moon` と見做します。つまり `moonlight` の中の `moon` はハイライトしません。\n\n逆に `moonlight` の中の `moon` を選択してハイライトを行った場合、`moon` も `moonlight` の中の `moon` もハイライトします。"
+}
