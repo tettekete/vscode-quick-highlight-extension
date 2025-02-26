@@ -38,7 +38,12 @@
     "commands": [
       {
         "command": "tettekete.toggle-highlight-word",
-        "title": "toggle highlight",
+        "title": "Toggle highlight",
+        "category": "QuickHighlight"
+      },
+      {
+        "command": "tettekete.remove-all-highlight",
+        "title": "Remove all highlight",
         "category": "QuickHighlight"
       }
     ],

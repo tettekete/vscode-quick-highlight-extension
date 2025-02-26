@@ -12,9 +12,17 @@ import { HighlightStore } from './lib/highlight-store';
 export function activate(context: vscode.ExtensionContext)
 {
 
-	const toggleHighlightWord =vscode.commands.registerCommand(
+	const toggleHighlightWord = vscode.commands.registerCommand(
 		'tettekete.toggle-highlight-word'
 		,toggleWordHighlight
+	);
+
+	const removeAllHighlight = vscode.commands.registerCommand(
+		'tettekete.remove-all-highlight'
+		,()=>
+		{
+			HighlightStore.instance().clearAll();
+		}
 	);
 
 	const docsChangeListener = vscode.workspace.onDidChangeTextDocument(
@@ -55,6 +63,7 @@ export function activate(context: vscode.ExtensionContext)
 
 	context.subscriptions.push( 
 		toggleHighlightWord,
+		removeAllHighlight,
 		docsChangeListener
 		// treeView
 	);
