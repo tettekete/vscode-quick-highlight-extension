@@ -54,7 +54,24 @@
         "mac": "ctrl+q",
         "when": "editorTextFocus"
       }
-    ]
+    ],
+    "viewsContainers": {
+        "panel": [
+            {
+                "id": "quickHighlightPanel",
+                "title": "Quick Highlight",
+                "icon": "media/panel-icon.svg"
+            }
+        ]
+    },
+    "views": {
+        "quickHighlightPanel": [
+            {
+                "id": "quickHighlightView",
+                "name": "Highlight Management"
+            }
+        ]
+    }
   },
   "scripts": {
     "vscode:prepublish": "npm run package",

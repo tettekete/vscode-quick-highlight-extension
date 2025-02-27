@@ -15,8 +15,11 @@ interface HighlightRecord
 	word: string;
 }
 
-export class HighlightStore
+export class HighlightStore implements vscode.TreeDataProvider<HighlightObject>
 {
+	private _onDidChangeTreeData: vscode.EventEmitter<HighlightObject | undefined> = new vscode.EventEmitter<HighlightObject | undefined>();
+    public readonly onDidChangeTreeData: vscode.Event<HighlightObject | undefined> = this._onDidChangeTreeData.event;
+
 	static #instance: HighlightStore;
 	private regexHighlightMap: Map<string,HighlightRecord> = new Map();
 
@@ -51,6 +54,7 @@ export class HighlightStore
 		}
 
 		const highlight = new HighlightObject({
+			word,
 			regex,
 			decorationBuilder
 		});
@@ -64,6 +68,8 @@ export class HighlightStore
 		);
 
 		highlight.update();
+
+		this.updateTreeView();
 	}
 
 	has( regex: string | RegExp )
@@ -94,6 +100,7 @@ export class HighlightStore
 		{
 			record.highlight.dispose();
 			this.regexHighlightMap.delete( regexKey );
+			this.updateTreeView();
 		}
 	}
 
@@ -106,6 +113,7 @@ export class HighlightStore
 		}
 
 		this.regexHighlightMap.clear();
+		this.updateTreeView();
 	}
 
 
@@ -144,6 +152,23 @@ export class HighlightStore
 		}
 
 		return updated;
+	}
+
+	// vscode.TreeDataProvider interface
+	getTreeItem(element: HighlightObject): vscode.TreeItem
+	{
+		return element;
+	}
+
+	getChildren(element?: HighlightObject): Thenable<HighlightObject[]>
+	{
+		const itemList:HighlightObject[] = [...this.regexHighlightMap.values()].map((item) => item.highlight );
+		return Promise.resolve( itemList );
+	}
+
+	updateTreeView()
+	{
+		this._onDidChangeTreeData.fire( undefined );
 	}
 
 

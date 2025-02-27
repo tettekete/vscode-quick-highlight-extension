@@ -25,6 +25,14 @@ export function activate(context: vscode.ExtensionContext)
 		}
 	);
 
+	const removeHighlightWithRegexString  = vscode.commands.registerCommand(
+		'tettekete.remove-highlight-with-regex'
+		,( regexString:string )=>
+		{
+			HighlightStore.instance().removeHighlightWithRegex( regexString );
+		}
+	);
+
 	const docsChangeListener = vscode.workspace.onDidChangeTextDocument(
 		(event) =>
 		{
@@ -58,14 +66,14 @@ export function activate(context: vscode.ExtensionContext)
 		}
 	);
 
-	// const treeDataProvider = new MyDataProvider();
-    // const treeView = vscode.window.createTreeView('myCustomView', { treeDataProvider });
+	const treeDataProvider = HighlightStore.instance();
+    const treeView = vscode.window.createTreeView('quickHighlightView', { treeDataProvider });
 
 	context.subscriptions.push( 
 		toggleHighlightWord,
 		removeAllHighlight,
-		docsChangeListener
-		// treeView
+		docsChangeListener,
+		treeView
 	);
 }
 

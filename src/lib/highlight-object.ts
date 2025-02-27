@@ -6,7 +6,7 @@ import {
 } from './utils';
 
 
-export class HighlightObject
+export class HighlightObject extends vscode.TreeItem
 {
 	private editorRangesMap: Map<vscode.TextEditor,vscode.Range[]> = new Map();
 	private decoration: vscode.TextEditorDecorationType;
@@ -16,15 +16,28 @@ export class HighlightObject
 
 	constructor(
 		{
+			word,
 			regex,
 			decorationBuilder
 		}:
 		{
+			word: string;
 			regex: RegExp;
 			decorationBuilder: ()=> vscode.DecorationRenderOptions;
 		}
 	)
 	{
+		// setup as TreeItem
+		super( word );
+		this.description = regex.toString();
+		this.command = {
+			command: 'tettekete.remove-highlight-with-regex',
+			title: "remove this",
+			arguments: [ regex.toString() ]
+		};
+		this.iconPath = new vscode.ThemeIcon('close');
+
+		// setup as HighlightObject
 		this.regex = regex;
 		this.regexString = regex.toString();
 		this.decoration = vscode.window.createTextEditorDecorationType( decorationBuilder() );
