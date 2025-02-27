@@ -3,7 +3,10 @@ import * as vscode from 'vscode';
 
 import { VSCConfig } from './lib/vsc-config';
 import { HighlightStore } from './lib/highlight-store';
-import { getHighlightColor } from './lib/highlight-color';
+import {
+	getHighlightColor,
+	getComplementaryColorForText
+} from './lib/highlight-color';
 
 export function toggleWordHighlight()
 {
@@ -47,8 +50,8 @@ function decorationBuilder():vscode.DecorationRenderOptions
 	{
 		return {
 				backgroundColor: highlightColor,
-				opacity: "0.5",
-				borderRadius: "0.2rem"
+				borderRadius: "0.2rem",
+				color: getComplementaryColorForText()
 			};
 	}
 
