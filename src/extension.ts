@@ -7,10 +7,12 @@ import {
 } from './lib/utils';
 
 import { HighlightStore } from './lib/highlight-store';
+import { VSCContext } from './lib/vsc-context';
 
 
 export function activate(context: vscode.ExtensionContext)
 {
+	VSCContext.setExtensionContext( context );
 
 	const toggleHighlightWord = vscode.commands.registerCommand(
 		'tettekete.toggle-highlight-word'

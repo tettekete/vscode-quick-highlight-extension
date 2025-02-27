@@ -1,5 +1,6 @@
 import * as vscode from 'vscode';
 
+import { VSCContext } from './vsc-context';
 
 export function escapeRegexMeta(str: string): string
 {
@@ -179,7 +180,7 @@ export function getExpandedLineRange( range: vscode.Range ,deltaLine: number = 1
 	{
 		expandedStart = range.start.translate( -deltaLine );
 	}
-	
+
 	const expandedEnd	= range.end.translate( deltaLine );
 
 	return new vscode.Range( expandedStart , expandedEnd );
@@ -189,4 +190,15 @@ export function getTextFromEditorSelection( editor: vscode.TextEditor )
 {
 	const selectionRange = new vscode.Range( editor.selection.start ,editor.selection.end );
 	return editor.document.getText( selectionRange );
+}
+
+
+export function buildUriUnderMedia(...args:string[]):vscode.Uri
+{
+	const mediaPath = VSCContext.extensionContext().extensionUri;
+	return	vscode.Uri.joinPath(
+							mediaPath,
+							"media",
+							...args
+						);
 }
