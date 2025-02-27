@@ -3,6 +3,7 @@ import * as vscode from "vscode";
 import { 
 	getActiveTextEditorForTabGroup,
 	findMatchesInEditor,
+	buildUriUnderMedia
 } from './utils';
 
 
@@ -18,24 +19,27 @@ export class HighlightObject extends vscode.TreeItem
 		{
 			word,
 			regex,
-			decorationBuilder
+			decorationBuilder,
+			collapsibleState,
 		}:
 		{
 			word: string;
 			regex: RegExp;
 			decorationBuilder: ()=> vscode.DecorationRenderOptions;
+			collapsibleState: vscode.TreeItemCollapsibleState;
 		}
 	)
 	{
 		// setup as TreeItem
-		super( word );
+		super( word , collapsibleState );
+		this.contextValue = 'ThisIsHighlightObject';
 		this.description = regex.toString();
-		this.command = {
-			command: 'tettekete.remove-highlight-with-regex',
-			title: "remove this",
-			arguments: [ regex.toString() ]
-		};
-		this.iconPath = new vscode.ThemeIcon('close');
+		// this.command = {
+		// 	command: 'tettekete.remove-highlight-with-regex',
+		// 	title: "remove this",
+		// 	arguments: [ regex.toString() ]
+		// };
+		this.iconPath = buildUriUnderMedia('panel-icon.svg');
 
 		// setup as HighlightObject
 		this.regex = regex;

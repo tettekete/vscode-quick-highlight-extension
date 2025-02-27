@@ -7,6 +7,8 @@ import {
 } from './lib/utils';
 
 import { HighlightStore } from './lib/highlight-store';
+import type { HighlightObject } from './lib/highlight-object';
+
 import { VSCContext } from './lib/vsc-context';
 
 
@@ -29,9 +31,9 @@ export function activate(context: vscode.ExtensionContext)
 
 	const removeHighlightWithRegexString  = vscode.commands.registerCommand(
 		'tettekete.remove-highlight-with-regex'
-		,( regexString:string )=>
+		,( highlightObject: HighlightObject )=>
 		{
-			HighlightStore.instance().removeHighlightWithRegex( regexString );
+			HighlightStore.instance().removeHighlightWithRegex( highlightObject.regexString );
 		}
 	);
 
@@ -75,6 +77,7 @@ export function activate(context: vscode.ExtensionContext)
 		toggleHighlightWord,
 		removeAllHighlight,
 		docsChangeListener,
+		removeHighlightWithRegexString,
 		treeView
 	);
 }

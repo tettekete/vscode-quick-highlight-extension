@@ -56,7 +56,8 @@ export class HighlightStore implements vscode.TreeDataProvider<HighlightObject>
 		const highlight = new HighlightObject({
 			word,
 			regex,
-			decorationBuilder
+			decorationBuilder,
+			collapsibleState: vscode.TreeItemCollapsibleState.None
 		});
 
 		this.regexHighlightMap.set(

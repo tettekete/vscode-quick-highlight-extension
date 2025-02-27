@@ -45,8 +45,29 @@
         "command": "tettekete.remove-all-highlight",
         "title": "Remove all highlight",
         "category": "QuickHighlight"
+      },
+      {
+        "command": "tettekete.remove-highlight-with-regex",
+        "title": "Remove highlight",
+        "category": "QuickHighlight",
+        "icon": "$(close)",
+        "enablement": "view == quickHighlightView"
       }
     ],
+    "menus": {
+      "view/item/context":[
+        {
+          "when": "view == quickHighlightView && viewItem == ThisIsHighlightObject",
+          "command": "tettekete.remove-highlight-with-regex",
+          "group": "inline"
+        },
+        {
+          "when": "view == quickHighlightView && viewItem == ThisIsHighlightObject",
+          "command": "tettekete.remove-highlight-with-regex",
+          "group": "z_commands"
+        }
+      ]
+    },
     "keybindings":[
       {
         "command": "tettekete.toggle-highlight-word",
@@ -67,8 +88,9 @@
     "views": {
         "quickHighlightPanel": [
             {
-                "id": "quickHighlightView",
-                "name": "Highlight Management"
+              "type": "tree",
+              "id": "quickHighlightView",
+              "name": "Highlight Management"
             }
         ]
     }
