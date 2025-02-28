@@ -89,6 +89,11 @@ export class HighlightObject extends vscode.TreeItem
 		return false;
 	}
 
+	getEditorsRanges( editor:vscode.TextEditor ):vscode.Range[] | undefined
+	{
+		return this.editorRangesMap.get( editor );
+	}
+
 
 	dispose()
 	{
