@@ -1,7 +1,7 @@
 import * as vscode from "vscode";
 
 import { 
-	getActiveTextEditorForTabGroup,
+	findAllActiveTextEditors,
 	findMatchesInEditor,
 	buildUriUnderMedia
 } from './utils';
@@ -52,7 +52,7 @@ export class HighlightObject extends vscode.TreeItem
 	{
 		if( ! editors )
 		{
-			editors = this._findAllActiveTextEditors();
+			editors = findAllActiveTextEditors();
 		}
 
 		editors.forEach((editor)=>
@@ -101,23 +101,4 @@ export class HighlightObject extends vscode.TreeItem
 		this.editorRangesMap.clear();
 	}
 
-
-	private _findAllActiveTextEditors()
-	{
-		const result: vscode.TextEditor[] = [];
-
-		vscode.window.tabGroups.all.forEach((tagGroup)=>
-			{
-				const viewColumn = tagGroup.activeTab?.group.viewColumn;
-				if( viewColumn === undefined ){ return; }
-
-				const activeEditor = getActiveTextEditorForTabGroup( viewColumn );
-				if( activeEditor === undefined ){ return; }
-
-				result.push( activeEditor );
-			}
-		);
-
-		return result;
-	}
 }

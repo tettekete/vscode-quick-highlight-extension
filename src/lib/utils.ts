@@ -142,6 +142,25 @@ export function findActiveEditorsByUri( uri: vscode.Uri ):vscode.TextEditor[]
 }
 
 
+export function findAllActiveTextEditors()
+{
+	const editorList: vscode.TextEditor[] = [];
+
+	vscode.window.tabGroups.all.forEach((tagGroup)=>
+		{
+			const viewColumn = tagGroup.activeTab?.group.viewColumn;
+			if( viewColumn === undefined ){ return; }
+
+			const activeEditor = getActiveTextEditorForTabGroup( viewColumn );
+			if( activeEditor === undefined ){ return; }
+
+			editorList.push( activeEditor );
+		}
+	);
+
+	return editorList;
+}
+
 
 export function rangeDescription( range: vscode.Range )
 {
