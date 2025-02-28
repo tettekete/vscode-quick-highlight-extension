@@ -52,6 +52,16 @@
         "category": "QuickHighlight",
         "icon": "$(close)",
         "enablement": "view == quickHighlightView"
+      },
+      {
+        "command": "tettekete.goto-next-highlight",
+        "title": "Go to next highlight",
+        "category": "QuickHighlight"
+      },
+      {
+        "command": "tettekete.goto-prev-highlight",
+        "title": "Go to previous highlight",
+        "category": "QuickHighlight"
       }
     ],
     "menus": {
@@ -60,6 +70,16 @@
           "when": "view == quickHighlightView && viewItem == ThisIsHighlightObject",
           "command": "tettekete.remove-highlight-with-regex",
           "group": "inline"
+        },
+        {
+          "when": "view == quickHighlightView && viewItem == ThisIsHighlightObject",
+          "command": "tettekete.goto-next-highlight",
+          "group": "navigation"
+        },
+        {
+          "when": "view == quickHighlightView && viewItem == ThisIsHighlightObject",
+          "command": "tettekete.goto-prev-highlight",
+          "group": "navigation"
         },
         {
           "when": "view == quickHighlightView && viewItem == ThisIsHighlightObject",

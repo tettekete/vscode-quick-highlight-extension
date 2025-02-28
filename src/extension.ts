@@ -7,9 +7,10 @@ import {
 } from './lib/utils';
 
 import { HighlightStore } from './lib/highlight-store';
-import type { HighlightObject } from './lib/highlight-object';
+import { HighlightObject } from './lib/highlight-object';
 
 import { VSCContext } from './lib/vsc-context';
+import { HighlightNavigator } from './lib/highlight-navigator';
 
 
 export function activate(context: vscode.ExtensionContext)
@@ -34,6 +35,40 @@ export function activate(context: vscode.ExtensionContext)
 		,( highlightObject: HighlightObject )=>
 		{
 			HighlightStore.instance().removeHighlightWithRegex( highlightObject.regexString );
+		}
+	);
+
+	const gotoNextHighlight  = vscode.commands.registerCommand(
+		'tettekete.goto-next-highlight'
+		,( highlightObject?: HighlightObject )=>
+		{
+			if( highlightObject instanceof HighlightObject )
+			{
+				HighlightNavigator.gotoNext({
+					regexString:  highlightObject.regexString
+				});
+			}
+			else
+			{
+				HighlightNavigator.gotoNext();
+			}
+		}
+	);
+
+	const gotoPreviousHighlight  = vscode.commands.registerCommand(
+		'tettekete.goto-prev-highlight'
+		,( highlightObject?: HighlightObject )=>
+		{
+			if( highlightObject instanceof HighlightObject )
+			{
+				HighlightNavigator.gotoPrevious({
+					regexString:  highlightObject.regexString
+				});
+			}
+			else
+			{
+				HighlightNavigator.gotoPrevious();
+			}
 		}
 	);
 
@@ -78,6 +113,8 @@ export function activate(context: vscode.ExtensionContext)
 		removeAllHighlight,
 		docsChangeListener,
 		removeHighlightWithRegexString,
+		gotoNextHighlight,
+		gotoPreviousHighlight,
 		treeView
 	);
 }
