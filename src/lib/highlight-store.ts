@@ -173,7 +173,7 @@ export class HighlightStore implements vscode.TreeDataProvider<HighlightObject>
 	}
 
 
-	static getRegexAndWordFromEditor( editor: vscode.TextEditor )
+	static getRegexAndWordFromEditor( editor: vscode.TextEditor ):{word:string , regex: RegExp ,range: vscode.Range }
 	{
 		const selectionRange = new vscode.Range( editor.selection.start ,editor.selection.end );
 		const word = editor.document.getText( selectionRange );
@@ -213,7 +213,8 @@ export class HighlightStore implements vscode.TreeDataProvider<HighlightObject>
 
 		return {
 			word,
-			regex: RegExp( regexSource ,option )
+			regex: RegExp( regexSource ,option ),
+			range: selectionRange
 		};
 	}
 }
