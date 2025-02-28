@@ -118,6 +118,15 @@ export class HighlightStore implements vscode.TreeDataProvider<HighlightObject>
 	}
 
 
+	updateWithEditor( editor: vscode.TextEditor )
+	{
+		for( const rec of this.regexHighlightMap.values() )
+		{
+			rec.highlight.update( [editor] );
+		}
+	}
+
+
 	updateWithEditorRange( editor:vscode.TextEditor , eventRanges:vscode.Range[] ):boolean
 	{
 		for( const rec of this.regexHighlightMap.values() )

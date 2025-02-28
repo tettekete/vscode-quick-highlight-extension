@@ -105,6 +105,15 @@ export function activate(context: vscode.ExtensionContext)
 		}
 	);
 
+	const activeEditorListener = vscode.window.onDidChangeActiveTextEditor( (editor)=>
+		{
+			if( editor )
+			{
+				HighlightStore.instance().updateWithEditor( editor );
+			}
+		}
+	);
+
 	const treeDataProvider = HighlightStore.instance();
     const treeView = vscode.window.createTreeView('quickHighlightView', { treeDataProvider });
 
@@ -115,6 +124,7 @@ export function activate(context: vscode.ExtensionContext)
 		removeHighlightWithRegexString,
 		gotoNextHighlight,
 		gotoPreviousHighlight,
+		activeEditorListener,
 		treeView
 	);
 }
