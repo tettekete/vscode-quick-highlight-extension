@@ -20,7 +20,9 @@ export function activate(context: vscode.ExtensionContext)
 
 	HightLightBox.setRenderOptionBase({
 		textDecoration: 'underline',
-		fontWeight: 'bold'
+		fontWeight: 'bold',
+		outline: '0.25rem double',
+		outlineColor: new vscode.ThemeColor('focusBorder'),
 	});
 
 	const toggleHighlightWord = vscode.commands.registerCommand(
