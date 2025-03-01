@@ -1,6 +1,9 @@
 import * as vscode from 'vscode';
 
-import { HighlightObject } from './highlight-object';
+import {
+	HighlightObject,
+	HighlightRootNode
+} from './highlight-object';
 import {
 	escapeRegexMeta,
 	getExpandedRange,
@@ -15,7 +18,7 @@ interface HighlightRecord
 	word: string;
 }
 
-export class HighlightStore implements vscode.TreeDataProvider<HighlightObject>
+export class HighlightStore implements vscode.TreeDataProvider<HighlightRootNode | HighlightObject>
 {
 	private _onDidChangeTreeData: vscode.EventEmitter<HighlightObject | undefined> = new vscode.EventEmitter<HighlightObject | undefined>();
     public readonly onDidChangeTreeData: vscode.Event<HighlightObject | undefined> = this._onDidChangeTreeData.event;
@@ -170,10 +173,18 @@ export class HighlightStore implements vscode.TreeDataProvider<HighlightObject>
 		return element;
 	}
 
-	getChildren(element?: HighlightObject): Thenable<HighlightObject[]>
+	getChildren(element?: HighlightObject | HighlightRootNode ): Thenable<HighlightObject[] | HighlightRootNode[]>
 	{
-		const itemList:HighlightObject[] = [...this.regexHighlightMap.values()].map((item) => item.highlight );
-		return Promise.resolve( itemList );
+		if( element )
+		{
+			const itemList:HighlightObject[] = [...this.regexHighlightMap.values()].map((item) => item.highlight );
+			return Promise.resolve( itemList );
+		}
+		else
+		{
+			return Promise.resolve( [ new HighlightRootNode() ] );
+		}
+		
 	}
 
 	updateTreeView()

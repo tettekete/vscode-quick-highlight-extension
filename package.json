@@ -44,7 +44,8 @@
       {
         "command": "tettekete.remove-all-highlight",
         "title": "Remove all highlight",
-        "category": "QuickHighlight"
+        "category": "QuickHighlight",
+        "icon": "$(trash)"
       },
       {
         "command": "tettekete.remove-highlight-with-regex",
@@ -66,6 +67,16 @@
     ],
     "menus": {
       "view/item/context":[
+        {
+          "when": "view == quickHighlightView && viewItem == ThisIsHighlightRootNode",
+          "command": "tettekete.remove-all-highlight",
+          "group": "inline"
+        },
+         {
+          "when": "view == quickHighlightView && viewItem == ThisIsHighlightRootNode",
+          "command": "tettekete.remove-all-highlight",
+          "group": "z_commands"
+        },
         {
           "when": "view == quickHighlightView && viewItem == ThisIsHighlightObject",
           "command": "tettekete.remove-highlight-with-regex",

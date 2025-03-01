@@ -6,6 +6,16 @@ import {
 	buildUriUnderMedia
 } from './utils';
 
+export class HighlightRootNode extends vscode.TreeItem
+{
+	constructor()
+	{
+		super( 'All Highlight' , vscode.TreeItemCollapsibleState.Expanded );
+		this.contextValue = 'ThisIsHighlightRootNode';
+		this.iconPath = buildUriUnderMedia('panel-icon.svg');
+	}
+}
+
 
 export class HighlightObject extends vscode.TreeItem
 {
@@ -33,13 +43,20 @@ export class HighlightObject extends vscode.TreeItem
 		// setup as TreeItem
 		super( word , collapsibleState );
 		this.contextValue = 'ThisIsHighlightObject';
-		this.description = regex.toString();
+		if( regex.toString().includes('\\b') )
+		{
+			this.description = 'As a standalone word';
+		}
+		else
+		{
+			this.description = 'As a mere search term';
+		}
 		// this.command = {
 		// 	command: 'tettekete.remove-highlight-with-regex',
 		// 	title: "remove this",
 		// 	arguments: [ regex.toString() ]
 		// };
-		this.iconPath = buildUriUnderMedia('panel-icon.svg');
+		// this.iconPath = buildUriUnderMedia('panel-icon.svg');
 
 		// setup as HighlightObject
 		this.regex = regex;
