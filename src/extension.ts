@@ -11,11 +11,17 @@ import { HighlightObject } from './lib/highlight-object';
 
 import { VSCContext } from './lib/vsc-context';
 import { HighlightNavigator } from './lib/highlight-navigator';
+import { HightLightBox } from './lib/hight-light-box';
 
 
 export function activate(context: vscode.ExtensionContext)
 {
 	VSCContext.setExtensionContext( context );
+
+	HightLightBox.setRenderOptionBase({
+		textDecoration: 'underline',
+		fontWeight: 'bold'
+	});
 
 	const toggleHighlightWord = vscode.commands.registerCommand(
 		'tettekete.toggle-highlight-word'
@@ -114,6 +120,15 @@ export function activate(context: vscode.ExtensionContext)
 		}
 	);
 
+	const editorSelectionChangedListener = vscode.window.onDidChangeTextEditorSelection( ( event ) =>
+		{
+			HightLightBox.disposeByEvent( event.textEditor );
+		}
+		,null
+		,context.subscriptions
+	);
+
+
 	const treeDataProvider = HighlightStore.instance();
     const treeView = vscode.window.createTreeView('quickHighlightView', { treeDataProvider });
 
@@ -125,6 +140,7 @@ export function activate(context: vscode.ExtensionContext)
 		gotoNextHighlight,
 		gotoPreviousHighlight,
 		activeEditorListener,
+		editorSelectionChangedListener,
 		treeView
 	);
 }

@@ -1,6 +1,7 @@
 import * as vscode from 'vscode';
 
 import { HighlightStore } from './highlight-store';
+import { HightLightBox } from './hight-light-box';
 
 export class HighlightNavigator
 {
@@ -126,11 +127,19 @@ export class HighlightNavigator
 			rangeIdx = ranges.length + rangeIdx;
 		}
 
-		editor.revealRange( ranges[rangeIdx] ,vscode.TextEditorRevealType.InCenter );
+		editor.revealRange( ranges[rangeIdx] ,vscode.TextEditorRevealType.Default );
 		editor.selection = new vscode.Selection( ranges[rangeIdx].start , ranges[rangeIdx].end);
 
 		cls.lastEditor = new WeakRef( editor );
 		cls.lastRegexString = regexString;
 		cls.lastIndx = rangeIdx;
+
+		HightLightBox.show(
+			{
+				editor,
+				range: ranges[rangeIdx],
+				eventBlockDuration: 0.3
+			}
+		);
 	}
 }
