@@ -68,9 +68,29 @@ export class HighlightNavigator
 		if(! regexString )
 		{
 			// create regexString and range from activeTextEditor.
-			const r = HighlightStore.getRegexAndWordFromEditor( editor );
-			regexString	= r.regex.toString();
-			range		= r.range;
+			if( editor.selection.isEmpty )
+			{
+				const r = HighlightStore.instance().findHighlightAtEditorPosition(
+					editor
+				);
+				if( r )
+				{
+					regexString = r.highlight.regexString;
+					range = r.range;
+				}
+				else
+				{
+					// regexString が定まらないと言うことは探すべき Highlight が定まらないということ
+					// If the regexString is not fixed, it means that the Highlight to be searched for is not fixed.
+					return;
+				}
+			}
+			else
+			{
+				const r = HighlightStore.getRegexAndWordFromEditor( editor );
+				regexString	= r.regex.toString();
+				range		= r.range;
+			}
 		}
 
 		const hObj = HighlightStore.instance().getHighlightForRegex( regexString );

@@ -107,6 +107,68 @@ export class HighlightObject extends vscode.TreeItem
 		return false;
 	}
 
+
+	hasEqualRange( editor: vscode.TextEditor ,range: vscode.Range ): boolean
+	{
+		const ranges = this.editorRangesMap.get( editor );
+
+		if( ! ranges )
+		{
+			return false;
+		}
+
+		for(const theRange of ranges )
+		{
+			if( theRange.isEqual( range ) )
+			{
+				return true;
+			}
+		}
+		return false;
+	}
+
+
+	hasRangeContainingPosition( editor: vscode.TextEditor , pos: vscode.Position ): boolean
+	{
+		const ranges = this.editorRangesMap.get( editor );
+
+		if( ! ranges )
+		{
+			return false;
+		}
+
+		for(const theRange of ranges )
+		{
+			if( theRange.contains( pos ) )
+			{
+				return true;
+			}
+		}
+		return false;
+	}
+
+	findRangeInEditorPosition( editor: vscode.TextEditor ,pos: vscode.Position )
+	:vscode.Range | undefined
+	{
+		const ranges = this.editorRangesMap.get( editor );
+
+		if( ! ranges )
+		{
+			return undefined;
+		}
+
+		for( const range of ranges )
+		{
+			if( range.contains( pos ) )
+			{
+				return range;
+			}
+		}
+
+		return undefined;
+	}
+
+
 	getEditorsRanges( editor:vscode.TextEditor ):vscode.Range[] | undefined
 	{
 		return this.editorRangesMap.get( editor );

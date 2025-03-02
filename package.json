@@ -66,6 +66,23 @@
       }
     ],
     "menus": {
+      "editor/context": [
+        {
+          "submenu": "quick-highlight.editor-context.submenu",
+          "group": "navigation",
+          "when": "isSelectionHighlighted"
+        }
+      ],
+      "quick-highlight.editor-context.submenu":[
+        {
+          "command": "tettekete.goto-next-highlight",
+          "group": "order@1"
+        },
+         {
+          "command": "tettekete.goto-prev-highlight",
+          "group": "order@2"
+        }
+      ],
       "view/item/context":[
         {
           "when": "view == quickHighlightView && viewItem == ThisIsHighlightRootNode",
@@ -99,6 +116,12 @@
         }
       ]
     },
+    "submenus": [
+      {
+        "id": "quick-highlight.editor-context.submenu",
+        "label": "Quick Highlight"
+      }
+    ],
     "keybindings":[
       {
         "command": "tettekete.toggle-highlight-word",

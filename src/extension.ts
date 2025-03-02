@@ -25,6 +25,8 @@ export function activate(context: vscode.ExtensionContext)
 		outlineColor: new vscode.ThemeColor('focusBorder'),
 	});
 
+	vscode.commands.executeCommand('setContext', 'isSelectionHighlighted' , false );
+
 	const toggleHighlightWord = vscode.commands.registerCommand(
 		'tettekete.toggle-highlight-word'
 		,toggleWordHighlight
@@ -125,6 +127,7 @@ export function activate(context: vscode.ExtensionContext)
 	const editorSelectionChangedListener = vscode.window.onDidChangeTextEditorSelection( ( event ) =>
 		{
 			HightLightBox.disposeByEvent( event.textEditor );
+			updateSelectionHighlightFlag( event.textEditor );
 		}
 		,null
 		,context.subscriptions
@@ -150,3 +153,31 @@ export function activate(context: vscode.ExtensionContext)
 // This method is called when your extension is deactivated
 export function deactivate() {}
 
+function updateSelectionHighlightFlag( editor: vscode.TextEditor )
+{
+	// const range = new vscode.Range( editor.selection.start , editor.selection.end );
+	
+	let isSelectionHighlighted = false;
+
+	if( editor.selection.isEmpty )
+	{
+		isSelectionHighlighted = HighlightStore.instance().existsHighlightAtEditorPosition(
+			editor,
+			editor.selection.active
+		);
+	}
+	else
+	{
+		const range = editor.selection.with();
+		isSelectionHighlighted = HighlightStore.instance().existsHighlightInEditorRange(
+			editor,
+			range
+		);
+	}
+	
+	vscode.commands.executeCommand(
+		'setContext',
+		'isSelectionHighlighted',
+		isSelectionHighlighted
+	);
+}

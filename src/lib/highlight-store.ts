@@ -167,6 +167,58 @@ export class HighlightStore implements vscode.TreeDataProvider<HighlightRootNode
 		return updated;
 	}
 
+
+	existsHighlightInEditorRange( editor: vscode.TextEditor ,range: vscode.Range ):boolean
+	{
+		for(const rec of this.regexHighlightMap.values() )
+		{
+			if( rec.highlight.hasEqualRange( editor , range ) )
+			{
+				return true;
+			}
+		}
+
+		return false;
+	}
+
+	existsHighlightAtEditorPosition( editor: vscode.TextEditor ,pos: vscode.Position ):boolean
+	{
+		for(const rec of this.regexHighlightMap.values() )
+		{
+			if( rec.highlight.hasRangeContainingPosition( editor , pos ) )
+			{
+				return true;
+			}
+		}
+
+		return false;
+	}
+
+	
+	findHighlightAtEditorPosition( editor: vscode.TextEditor ):
+		{
+			highlight: HighlightObject;
+			range: vscode.Range;
+		} | undefined
+	{
+		const pos = editor.selection.active;
+		
+		for(const rec of this.regexHighlightMap.values() )
+		{
+			const rangeOrUndef = rec.highlight.findRangeInEditorPosition( editor , pos );
+			if( rangeOrUndef )
+			{
+				return {
+					highlight: rec.highlight,
+					range: rangeOrUndef
+				};
+			}
+		}
+
+		return undefined;
+	}
+
+
 	// vscode.TreeDataProvider interface
 	getTreeItem(element: HighlightObject): vscode.TreeItem
 	{
