@@ -42,6 +42,7 @@ export class HighlightObject extends vscode.TreeItem
 	{
 		// setup as TreeItem
 		super( word , collapsibleState );
+		const regexString = regex.toString();
 		this.contextValue = 'ThisIsHighlightObject';
 		if( regex.toString().includes('\\b') )
 		{
@@ -51,16 +52,16 @@ export class HighlightObject extends vscode.TreeItem
 		{
 			this.description = 'As a mere search term';
 		}
-		// this.command = {
-		// 	command: 'tettekete.remove-highlight-with-regex',
-		// 	title: "remove this",
-		// 	arguments: [ regex.toString() ]
-		// };
-		// this.iconPath = buildUriUnderMedia('panel-icon.svg');
+		this.command = {
+			command: 'tettekete.goto-next-highlight',
+			title: "Go to next highlight",
+			arguments: [ this ]
+		};
+		// this.iconPath = new vscode.ThemeIcon('primitive-dot',new vscode.ThemeColor('foreground'));
 
 		// setup as HighlightObject
 		this.regex = regex;
-		this.regexString = regex.toString();
+		this.regexString = regexString;
 		this.decoration = vscode.window.createTextEditorDecorationType( decorationBuilder() );
 	}
 
