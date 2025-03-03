@@ -41,6 +41,11 @@ export class VSCConfig
 		return config;
 	}
 
+	static async toggleCaseInsensitive(): Promise<boolean>
+	{
+		return await VSCConfig._toggleConfig( 'quick-highlight.caseInsensitive' );
+	}
+
 	// - - - - - - - - - - - - - - - - - - - -
 	// automaticWordBoundaryHandling<boolean>
 	// - - - - - - - - - - - - - - - - - - - -
@@ -56,6 +61,11 @@ export class VSCConfig
 		}
 
 		return config;
+	}
+
+	static async toggleAutomaticWordBoundaryHandling(): Promise<boolean>
+	{
+		return await VSCConfig._toggleConfig( 'quick-highlight.automaticWordBoundaryHandling' );
 	}
 
 
@@ -97,5 +107,22 @@ export class VSCConfig
 			return fallback;
 		}
 		return value;
+	}
+
+	static async _toggleConfig( configName: string ): Promise<boolean>
+	{
+		const value = !! vscode.workspace
+			.getConfiguration()
+			.get<boolean>( configName );
+		
+		await vscode.workspace.getConfiguration().update(
+			configName,
+			! value,
+			vscode.ConfigurationTarget.Global
+		);
+
+		return !! vscode.workspace
+			.getConfiguration()
+			.get<boolean>( configName );
 	}
 }
