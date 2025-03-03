@@ -258,22 +258,32 @@ export class HighlightStore implements vscode.TreeDataProvider<HighlightRootNode
 			const expandedWordRange = getExpandedRange( selectionRange );
 			const expandedWord = editor.document.getText( expandedWordRange );
 
-			let wordBoundaryCheckRegex = /^\W.+\W$/;
-			if( word.length + 2 !== expandedWord.length )
-			{
-				if( selectionRange.start.character === 0 )
-				{
-					wordBoundaryCheckRegex = /\W$/;
-				}
-				else
-				{
-					wordBoundaryCheckRegex = /^\W/;
-				}
-			}
-			
-			if( wordBoundaryCheckRegex.test( expandedWord ) )
+			if( word.length === expandedWord.length )
 			{
 				regexSource = `\\b${escapedWord}\\b`;
+				// Memo:
+				// Even though you expanded it, the length of the text you actually retrieved is
+				// the same as word.length, which means it is in the /^word$/ state.
+			}
+			else
+			{
+				let wordBoundaryCheckRegex = /^\W.+\W$/;
+				if( word.length + 2 !== expandedWord.length )
+				{
+					if( selectionRange.start.character === 0 )
+					{
+						wordBoundaryCheckRegex = /\W$/;
+					}
+					else
+					{
+						wordBoundaryCheckRegex = /^\W/;
+					}
+				}
+
+				if( wordBoundaryCheckRegex.test( expandedWord ) )
+				{
+					regexSource = `\\b${escapedWord}\\b`;
+				}
 			}
 		}
 
