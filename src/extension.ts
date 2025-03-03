@@ -12,6 +12,7 @@ import { HighlightObject } from './lib/highlight-object';
 import { VSCContext } from './lib/vsc-context';
 import { HighlightNavigator } from './lib/highlight-navigator';
 import { HightLightBox } from './lib/hight-light-box';
+import { VSCConfig } from './lib/vsc-config';
 
 
 export function activate(context: vscode.ExtensionContext)
@@ -83,6 +84,42 @@ export function activate(context: vscode.ExtensionContext)
 		}
 	);
 
+	// toggle config CaseInsensitive setting
+	const toggleCaseSensitiveSetting = vscode.commands.registerCommand(
+		'tettekete.toggle-config-case-sensitive'
+		,async () =>
+		{
+			const caseInsensitive = await VSCConfig.toggleCaseInsensitive();
+
+			let message = 'Quick Highlight is now Case-Sensitive.';
+			if( caseInsensitive )
+			{
+				message = 'Quick Highlight is now Case-Insensitive.';
+			}
+
+			vscode.window.setStatusBarMessage( message , 5000);
+		}
+	);
+
+	// toggle config AutomaticWordBoundaryHandling setting
+	const toggleAutomaticWordBoundaryHandling =  vscode.commands.registerCommand(
+		'tettekete.toggle-config-automatic-word-boundary-handling'
+		,async () =>
+		{
+			const AWBD = await VSCConfig.toggleAutomaticWordBoundaryHandling();
+
+			let onOff = 'OFF';
+			if( AWBD )
+			{
+				onOff = 'ON';
+			}
+
+			let message = `Quick Highlight: Word Boundary Handling is now ${onOff}.`;
+
+			vscode.window.setStatusBarMessage( message , 5000);
+		}
+	);
+
 	const docsChangeListener = vscode.workspace.onDidChangeTextDocument(
 		(event) =>
 		{
@@ -145,6 +182,8 @@ export function activate(context: vscode.ExtensionContext)
 		gotoPreviousHighlight,
 		activeEditorListener,
 		editorSelectionChangedListener,
+		toggleCaseSensitiveSetting,
+		toggleAutomaticWordBoundaryHandling,
 		treeView
 	);
 }

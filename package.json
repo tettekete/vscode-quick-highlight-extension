@@ -63,6 +63,16 @@
         "command": "tettekete.goto-prev-highlight",
         "title": "Go to previous highlight",
         "category": "QuickHighlight"
+      },
+      {
+        "command": "tettekete.toggle-config-case-sensitive",
+        "title": "Toggle Config: Case Sensitivity",
+        "category": "QuickHighlight"
+      },
+      {
+        "command": "tettekete.toggle-config-automatic-word-boundary-handling",
+        "title": "Toggle Config: Word Boundary Handling",
+        "category": "QuickHighlight"
       }
     ],
     "menus": {
