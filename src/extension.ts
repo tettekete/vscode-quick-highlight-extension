@@ -26,6 +26,7 @@ export function activate(context: vscode.ExtensionContext)
 	});
 
 	vscode.commands.executeCommand('setContext', 'isSelectionHighlighted' , false );
+	vscode.commands.executeCommand('setContext', 'hasSelection' , false );
 
 	const toggleHighlightWord = vscode.commands.registerCommand(
 		'tettekete.toggle-highlight-word'
@@ -88,13 +89,6 @@ export function activate(context: vscode.ExtensionContext)
 			const changes = event.contentChanges;
 			const doc = event.document;
 
-			changes.forEach(( change ) =>
-			{
-				console.debug(`Uri: ${doc.uri.toString()}`);
-				console.debug(`change.text: ${change.text}`);
-				console.debug(`change.range: ${rangeDescription(change.range)}`);
-			});
-
 			const editors = findActiveEditorsByUri( doc.uri );
 			const ranges:vscode.Range[] = [];
 			changes.forEach((change) =>
@@ -128,6 +122,11 @@ export function activate(context: vscode.ExtensionContext)
 		{
 			HightLightBox.disposeByEvent( event.textEditor );
 			updateSelectionHighlightFlag( event.textEditor );
+			vscode.commands.executeCommand(
+				'setContext',
+				'hasSelection' ,
+				! event.textEditor.selection.isEmpty
+			);
 		}
 		,null
 		,context.subscriptions

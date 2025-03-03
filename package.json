@@ -69,18 +69,36 @@
       "editor/context": [
         {
           "submenu": "quick-highlight.editor-context.submenu",
-          "group": "navigation",
+          "group": "navigation@200",
           "when": "isSelectionHighlighted"
+        },
+        {
+          "submenu": "quick-highlight.editor-context.no-highlight-submenu",
+          "group": "navigation@200",
+          "when": "! isSelectionHighlighted && hasSelection"
         }
       ],
       "quick-highlight.editor-context.submenu":[
         {
           "command": "tettekete.goto-next-highlight",
-          "group": "order@1"
+          "group": "group1@1"
         },
-         {
+        {
           "command": "tettekete.goto-prev-highlight",
-          "group": "order@2"
+          "group": "group1@2"
+        },
+        {
+          "command": "tettekete.toggle-highlight-word",
+          "group": "group2"
+        },
+        {
+          "command": "tettekete.remove-all-highlight",
+          "group": "group3"
+        }
+      ],
+      "quick-highlight.editor-context.no-highlight-submenu":[
+         {
+          "command": "tettekete.toggle-highlight-word"
         }
       ],
       "view/item/context":[
@@ -119,6 +137,10 @@
     "submenus": [
       {
         "id": "quick-highlight.editor-context.submenu",
+        "label": "Quick Highlight"
+      },
+      {
+        "id": "quick-highlight.editor-context.no-highlight-submenu",
         "label": "Quick Highlight"
       }
     ],

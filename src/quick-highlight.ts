@@ -12,16 +12,29 @@ export function toggleWordHighlight()
 {
 	const editor = vscode.window.activeTextEditor;
 	if( ! editor ){ return; }
-	if( editor.selection.isEmpty ){ return; }
+	
+	const store = HighlightStore.instance();
+	if( editor.selection.isEmpty )
+	{
+		const r = store.findHighlightAtEditorPosition( editor );
+		if( r )
+		{
+			store.removeHighlightWithRegex( r.highlight.regexString );
+			vscode.commands.executeCommand('setContext', 'isSelectionHighlighted' , false );
+			return;
+		}
+
+		return;
+	}
 
 	const { word , regex } = HighlightStore.getRegexAndWordFromEditor( editor );
 
-	const store = HighlightStore.instance();
-
+	
 	const highlightOrUndefined = store.getHighlightForRegex( regex );
 	if( highlightOrUndefined !== undefined )
 	{
 		store.removeHighlightWithRegex( regex );
+		vscode.commands.executeCommand('setContext', 'isSelectionHighlighted' , false );
 		return;
 	}
 	else
