@@ -44,14 +44,8 @@ export class HighlightObject extends vscode.TreeItem
 		super( word , collapsibleState );
 		const regexString = regex.toString();
 		this.contextValue = 'ThisIsHighlightObject';
-		if( regex.toString().includes('\\b') )
-		{
-			this.description = 'As a standalone word';
-		}
-		else
-		{
-			this.description = 'As a mere search term';
-		}
+		this.description = this.makeTreeItemDescription( regexString );
+
 		this.command = {
 			command: 'tettekete.goto-next-highlight',
 			title: "Go to next highlight",
@@ -181,4 +175,24 @@ export class HighlightObject extends vscode.TreeItem
 		this.editorRangesMap.clear();
 	}
 
+	private makeTreeItemDescription( regexString:string ): string
+	{
+		let boundaryInfo = 'As a mere search term';
+		if( regexString.includes('\\b') )
+		{
+			boundaryInfo = 'As a standalone word';
+		}
+
+		const regexOption = /([^\/]+)$/.exec( regexString );
+		let caseSensitiveInfo = 'Case-Sensitive match';
+		if( regexOption )
+		{
+			if( /i/.test( regexOption[1] ) )
+			{
+				caseSensitiveInfo = 'Case-Insensitive match';
+			}
+		}
+
+		return `${boundaryInfo} / ${caseSensitiveInfo}`;
+	}
 }
