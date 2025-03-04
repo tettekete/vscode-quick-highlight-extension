@@ -13,3 +13,7 @@ vsc-extension-quickstart.md
 **/*.ts
 **/.vscode-test.*
 _untrack/**
+docs/**
+!docs/images/quick-highlight-icon.png
+!docs/README.ja.md
+scripts/**
