@@ -30,6 +30,8 @@
 
 ハイライトは明示的に消すまでハイライトされ続けます。一時的に注意しておきたいワードをハイライトしておくのに便利な機能拡張です。
 
+![demo](https://tettekete.github.io/vscode-quick-highlight-extension/images/demo.gif)
+
 SublimeText 用プラグイン [HighlightWords](https://packagecontrol.io/packages/HighlightWords) のような機能を目標として開発されました。
 
 
