@@ -1,4 +1,6 @@
 
+<p align="center"><a href="https://tettekete.github.io/vscode-quick-highlight-extension/">English</a> / 日本語</p>
+
 **目次:**
 
 - [概要](#概要)
@@ -77,6 +79,8 @@ SublimeText 用プラグイン [HighlightWords](https://packagecontrol.io/packag
 ## `Quick Highlight` パネル
 
 VSCode 下部パネルをの `Quick Highlight` タブではハイライトワードの管理が可能です。
+
+<div align="center"><img src="https://tettekete.github.io/vscode-quick-highlight-extension/images/panel-ss.png" srcset="https://tettekete.github.io/vscode-quick-highlight-extension/images/panel-ss.png 2x" width="442"></div>
 
 - ハイライトの削除
   - 対象テキストをロールオーバーしたときに現れる右端の × ボタンをクリックする

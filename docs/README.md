@@ -1,4 +1,6 @@
 
+<p align="center">English / <a href="https://tettekete.github.io/vscode-quick-highlight-extension/README.ja.html">日本語</a></p>
+
 **Table of Contents:**
 
 - [Overview](#overview)
@@ -27,6 +29,8 @@
 This extension allows you to highlight selected text in the editor.
 
 The highlights persist until explicitly removed, making this extension useful for temporarily marking words you want to keep in mind.
+
+![demo](https://tettekete.github.io/vscode-quick-highlight-extension/images/demo.gif)
 
 It was developed with functionality similar to the SublimeText plugin [HighlightWords](https://packagecontrol.io/packages/HighlightWords).
 
@@ -78,7 +82,10 @@ Navigating through highlighted words requires that the text be highlighted or th
 
 ## `Quick Highlight` Panel
 
-In the `Quick Highlight` tab in the bottom panel of VSCode, you can manage highlighted words:
+In the `Quick Highlight` tab in the bottom panel of VSCode, you can manage highlighted words.
+
+<div align="center"><img src="https://tettekete.github.io/vscode-quick-highlight-extension/images/panel-ss.png" srcset="https://tettekete.github.io/vscode-quick-highlight-extension/images/panel-ss.png 2x" width="442"></div>
+
 
 - **Removing Highlights**
   - Click the × button that appears on the right end when you hover over the target text
