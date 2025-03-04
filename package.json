@@ -154,14 +154,6 @@
         "label": "Quick Highlight"
       }
     ],
-    "keybindings":[
-      {
-        "command": "tettekete.toggle-highlight-word",
-        "key": "alt+q",
-        "mac": "ctrl+q",
-        "when": "editorTextFocus"
-      }
-    ],
     "viewsContainers": {
         "panel": [
             {
