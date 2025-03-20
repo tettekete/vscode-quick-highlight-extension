@@ -2,7 +2,7 @@
   "name": "quick-highlight",
   "displayName": "Quick Highlight",
   "description": "This extension allows you to highlight selected text in the editor. The highlights persist until explicitly removed.",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "engines": {
     "vscode": "^1.96.0"
   },
