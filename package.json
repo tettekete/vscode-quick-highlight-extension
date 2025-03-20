@@ -4,7 +4,7 @@
   "description": "This extension allows you to highlight selected text in the editor. The highlights persist until explicitly removed.",
   "version": "0.1.1",
   "engines": {
-    "vscode": "^1.97.0"
+    "vscode": "^1.96.0"
   },
   "categories": [
     "Other"
@@ -194,7 +194,7 @@
     "test": "vscode-test"
   },
   "devDependencies": {
-    "@types/vscode": "^1.97.0",
+    "@types/vscode": "1.96.0",
     "@types/mocha": "^10.0.9",
     "@types/node": "20.x",
     "@typescript-eslint/eslint-plugin": "^8.10.0",
