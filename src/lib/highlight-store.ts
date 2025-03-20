@@ -260,7 +260,7 @@ export class HighlightStore implements vscode.TreeDataProvider<HighlightRootNode
 
 			if( word.length === expandedWord.length )
 			{
-				regexSource = `\\b${escapedWord}\\b`;
+				regexSource = `(?<=^|\\W)${escapedWord}(?=$|\\W)`;
 				// Memo:
 				// Even though you expanded it, the length of the text you actually retrieved is
 				// the same as word.length, which means it is in the /^word$/ state.
@@ -282,7 +282,7 @@ export class HighlightStore implements vscode.TreeDataProvider<HighlightRootNode
 
 				if( wordBoundaryCheckRegex.test( expandedWord ) )
 				{
-					regexSource = `\\b${escapedWord}\\b`;
+					regexSource = `(?<=^|\\W)${escapedWord}(?=$|\\W)`;
 				}
 			}
 		}
