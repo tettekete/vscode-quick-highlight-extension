@@ -1,5 +1,13 @@
 # Change Log
 
+
+## [0.1.3] - 2025-03-21
+
+### Fix
+
+- Fixed a bug where standalone words were not displaying the "As a standalone word" label in the Quick Highlight panel.
+
+
 ## [0.1.2] - 2025-03-21
 
 ### Compatibility
