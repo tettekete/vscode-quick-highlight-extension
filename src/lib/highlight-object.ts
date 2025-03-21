@@ -178,7 +178,7 @@ export class HighlightObject extends vscode.TreeItem
 	private makeTreeItemDescription( regexString:string ): string
 	{
 		let boundaryInfo = 'As a mere search term';
-		if( regexString.includes('\\b') )
+		if( regexString.includes('(?<=^|\\W)') )
 		{
 			boundaryInfo = 'As a standalone word';
 		}
